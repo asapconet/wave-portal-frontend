@@ -8,10 +8,46 @@ export default function App() {
 	const [count, setCount] = React.useState('');
 	const [waved, setWaved] = React.useState(false);
 	const [minning, setMinning] = React.useState(false);
+	const [allWaves, setAllWave] = React.useState([]);
 
-	const contractAddress = '0xE125DEB727c3Af9DBedc7EB0df8D26b3939017ab';
+	const contractAddress = '0x64b95D6b0a89016627b966154a95498974ddDbD4';
 
 	const contractABI = abi.abi;
+
+	const getAllWavea = async () => {
+		try {
+			const { ethereum } = window;
+			if (ethereum) {
+				const provider = new ethers.providers.web3Provider(ethereum);
+				const signer = provider.getSigner();
+				const wavePortalContract = new ethers.Contract(
+					contractAddress,
+					contractABI,
+					signer
+				);
+
+				//the main mathod to get all the waves
+				const waves = await waveContractPortal.getAllWaves();
+
+				//this struct is only needed in the frontend
+				let wavesCleaned = [];
+				waves.forEach(wave => {
+					waveCleaned.push({
+						address: wave.waver,
+						timestamp: new Date(wave.timestamp * 1000),
+						massage: wave.massage
+					});
+				});
+
+				// for storing our data in the state
+				setAllWaves(wavesCleaned);
+			} else {
+				console.log('Ehtereum object does not exist');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	//func to check if the wallet is connect
 	const walletCheck = async () => {
@@ -43,9 +79,7 @@ export default function App() {
 		try {
 			const { ethereum } = window;
 			if (!ethereum) {
-				alert(
-					'Get your metamask extention connected to browser'
-				);
+				alert('Get your metamask extention connected to browser');
 				return;
 			}
 
@@ -102,14 +136,6 @@ export default function App() {
 
 	useEffect(() => {
 		walletCheck();
-		// if (minning) {
-		//   const time = setTimeout(() => {
-		//     <>Minning...</>
-		//   }, 2000)
-		//   return () => clearTimeout(time)
-		// } else {
-		//   null
-		// }
 	}, []);
 	// const wave = () => {};
 
@@ -141,6 +167,22 @@ export default function App() {
 					)}
 					<p>{waved && count + ' waves in the bag so far...'}</p>
 				</span>
+				{allWaves.map((wave, index) => {
+					return (
+						<div
+							key={index}
+							styles={{
+								backgroundColor: 'OldLace',
+								marginTop: '16px',
+								padding: '8px'
+							}}
+						>
+							<div>Address:{wave.address}</div>
+							<div>Time: {wave.timestamp.toString()}</div>
+							<div>Message: {wave.message}</div>
+						</div>
+					);
+				})}
 			</div>
 		</div>
 	);
