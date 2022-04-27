@@ -26,10 +26,23 @@
 
 .waveButton {
   cursor: pointer;
-  margin-top: 16px;
   padding: 8px;
   border: 0;
-  border-radius: 5px;
+  border-radius: 0px;
   background-color: yellowgreen;
-  
+}
+
+.msg--wave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:1.4rem;
+  margin-bottom: 1.4rem;
+  width: 100%;
+}
+
+.msg--box {
+  height: 1.7rem;
+  border-radius: 0px;
+  border: solid .5px gray;
 }

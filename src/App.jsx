@@ -8,13 +8,13 @@ export default function App() {
 	const [count, setCount] = React.useState('');
 	const [waved, setWaved] = React.useState(false);
 	const [minning, setMinning] = React.useState(false);
-	const [allWaves, setAllWave] = React.useState([]);
+	const [allWaves, setAllWaves] = React.useState([]);
 
 	const contractAddress = '0x64b95D6b0a89016627b966154a95498974ddDbD4';
 
 	const contractABI = abi.abi;
 
-	const getAllWavea = async () => {
+	const getAllWaves = async () => {
 		try {
 			const { ethereum } = window;
 			if (ethereum) {
@@ -32,13 +32,13 @@ export default function App() {
 				//this struct is only needed in the frontend
 				let wavesCleaned = [];
 				waves.forEach(wave => {
-					waveCleaned.push({
+					wavesCleaned.push({
 						address: wave.waver,
 						timestamp: new Date(wave.timestamp * 1000),
-						massage: wave.massage
+						message: wave.message
 					});
 				});
-
+				console.log(allWaves);
 				// for storing our data in the state
 				setAllWaves(wavesCleaned);
 			} else {
@@ -106,7 +106,9 @@ export default function App() {
 					signer
 				);
 				// the real waver action
-				const waveTransaction = await wavePortalContract.wave();
+				const waveTransaction = await wavePortalContract.wave(
+					'this message must be provided by any user not hard coded'
+				);
 				setMinning(!minning);
 				console.log('Minning...', waveTransaction.hash);
 
@@ -143,15 +145,20 @@ export default function App() {
 		<div className="mainContainer">
 			<div className="dataContainer">
 				<div className="header">👋 Hey there!</div>
-
 				<div className="bio">
 					I am Asap and I work with web2 & 3 simultaniosly that's pretty cool
 					right? Connect your Ethereum wallet and holla at me!
 				</div>
-
-				<button className="waveButton" onClick={wave}>
-					Wave at Me
-				</button>
+				<div className="msg--wave">
+					<input
+						type="text"
+						placeholder="spill out here ~kiki"
+						className="msg--box"
+					/>
+					<button className="waveButton" onClick={wave}>
+						Wave at Me
+					</button>
+				</div>
 				{!currentAccount && (
 					<button className="waveButton" onClick={walletConnect}>
 						Connect Wallet
@@ -182,7 +189,8 @@ export default function App() {
 							<div>Message: {wave.message}</div>
 						</div>
 					);
-				})}
+				})}{' '}
+				<span />
 			</div>
 		</div>
 	);
