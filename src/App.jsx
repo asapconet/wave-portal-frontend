@@ -27,18 +27,25 @@ export default function App() {
 				);
 
 				//the main mathod to get all the waves
-				const waves = await waveContractPortal.getAllWaves();
+				const waves = await wavePortalContract.getAllWaves();
 
 				//this struct is only needed in the frontend
-				let wavesCleaned = [];
-				waves.forEach(wave => {
-					wavesCleaned.push({
+				let wavesCleaned = wave.map(() => {
+					return {
 						address: wave.waver,
 						timestamp: new Date(wave.timestamp * 1000),
 						message: wave.message
-					});
+					};
 				});
-				console.log(allWaves);
+				// let wavesCleaned = [];
+				// waves.forEach(wave => {
+				// 	wavesCleaned.push({
+				// 		address: wave.waver,
+				// 		timestamp: new Date(wave.timestamp * 1000),
+				// 		message: wave.message
+				// 	});
+				// });
+				console.log(wavesCleaned);
 				// for storing our data in the state
 				setAllWaves(wavesCleaned);
 			} else {
@@ -141,6 +148,39 @@ export default function App() {
 	}, []);
 	// const wave = () => {};
 
+	// stored items getter hook func
+	useEffect(() => {
+		let wavePortalContract;
+
+		const onNewWave = (from, timestamp, message) => {
+			console.log('NewWave', from, timestamp, message);
+			setAllWaves(prevState => [
+				...prevState,
+				{
+					address: from,
+					timestamp: new Date(timestamp * 1000),
+					message: message
+				}
+			]);
+		};
+		if (window.ethereum) {
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const signer = provider.getSigner();
+
+			wavePortalContract = new ethers.Contract(
+				contractAddress,
+				contractABI,
+				signer
+			);
+			wavePortalContract.on('NewWave', onNewWave);
+		}
+		return () => {
+			if (wavePortalContract) {
+				wavePortalContract.off('NewWave', onNewWave);
+			}
+		};
+	}, []);
+
 	return (
 		<div className="mainContainer">
 			<div className="dataContainer">
@@ -174,6 +214,7 @@ export default function App() {
 					)}
 					<p>{waved && count + ' waves in the bag so far...'}</p>
 				</span>
+				<span />
 				{allWaves.map((wave, index) => {
 					return (
 						<div
@@ -190,7 +231,6 @@ export default function App() {
 						</div>
 					);
 				})}{' '}
-				<span />
 			</div>
 		</div>
 	);
