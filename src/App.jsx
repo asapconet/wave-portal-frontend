@@ -17,51 +17,6 @@ export default function App() {
 
   const contractABI = abi.abi;
 
-  const getAllWaves = async () => {
-    try {
-      const { ethereum } = window;
-      if (ethereum) {
-        const provider = new ethers.providers.web3Provider(ethereum);
-        const signer = provider.getSigner();
-        const wavePortalContract = new ethers.Contract(
-          contractAddress,
-          contractABI,
-          signer
-        );
-
-        //the main mathod to get all the waves
-        const waves = await wavePortalContract.getAllWaves();
-        //this struct is only needed in the frontend
-
-        //THE FIRST METHOD TO MAP THE MASSAGES STORED ON THE ARRAY
-        let wavesCleaned = waves.map((wave) => {
-        	return {
-        		address: wave.waver,
-        		timestamp: new Date(wave.timestamp * 1000),
-        		message: wave.message
-        	};
-        });
-
-        //THE SECOND METHOD TO ASSIGN THE STRUCT TO AN ARRAY(FE)
-        // let wavesCleaned = [];
-        // waves.forEach((wave) => {
-        //   wavesCleaned.push({
-        //     address: wave.waver,
-        //     timestamp: new Date(wave.timestamp * 1000),
-        //     message: wave.message,
-        //   });
-        // });
-        console.log(wavesCleaned);
-        // for storing our data in the state
-        setAllWaves(wavesCleaned);
-      } else {
-        console.log("Ehtereum object does not exist");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   //func to check if the wallet is connect
   const walletCheck = async () => {
     try {
@@ -79,6 +34,7 @@ export default function App() {
         const newAccount = accounts[0];
         console.log("Here, found an authorized account:", newAccount);
         setCurrentAccount(newAccount);
+        setAllWaves(getAllWaves());
       } else {
         console.log("No authorized account found");
       }
@@ -127,7 +83,7 @@ export default function App() {
           { gasLimit: 300000 }
         );
         setMinning(!minning);
-        console.log(message)
+        console.log(message);
         console.log("Minning...", waveTransaction.hash);
 
         await waveTransaction.wait();
@@ -152,12 +108,56 @@ export default function App() {
       console.log(error);
     }
   };
-  // console.log(count);
+
+  // this method gets all waves from the Contract
+  const getAllWaves = async () => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const wavePortalContract = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+
+        //the main mathod to get all the waves
+        const waves = await wavePortalContract.getAllWaves();
+
+        //THE FIRST METHOD TO MAP OUT THE MASSAGES,ADDY & TIMESTAMP FROM THE CONTRACT
+        let wavesCleaned = waves.map((wave) => {
+          return {
+            address: wave.waver,
+            timestamp: new Date(wave.timestamp * 1000),
+            message: wave.message,
+          };
+        });
+
+        //THE SECOND METHOD TO ASSIGN THE FEATURES WE NEED ON THE FE TO AN ARRAY
+        // let wavesCleaned = [];
+        // waves.forEach((wave) => {
+        //   wavesCleaned.push({
+        //     address: wave.waver,
+        //     timestamp: new Date(wave.timestamp * 1000),
+        //     message: wave.message,
+        //   });
+        // });
+        console.log(wavesCleaned);
+
+        // for storing our data in the state
+        setAllWaves(wavesCleaned);
+      } else {
+        console.log("Ehtereum object does not exist");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     walletCheck();
   }, []);
-  // const wave = () => {};
 
   // stored items getter hook func
   useEffect(() => {
@@ -232,6 +232,7 @@ export default function App() {
           return (
             <div
               key={index}
+              className="msg--card"
               styles={{
                 backgroundColor: "OldLace",
                 marginTop: "16px",

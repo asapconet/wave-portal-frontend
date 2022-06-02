@@ -52,3 +52,9 @@
   font-style: italic;
   font-size: smaller;
 }
+
+.msg--card {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
