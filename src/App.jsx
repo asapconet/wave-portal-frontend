@@ -31,10 +31,10 @@ export default function App() {
       const accounts = await ethereum.request({ method: "eth_accounts" });
 
       if (accounts !== 0) {
+        getAllWaves();
         const newAccount = accounts[0];
         console.log("Here, found an authorized account:", newAccount);
         setCurrentAccount(newAccount);
-        setAllWaves(getAllWaves());
       } else {
         console.log("No authorized account found");
       }
