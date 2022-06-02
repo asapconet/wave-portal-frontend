@@ -31,7 +31,7 @@ export default function App() {
       const accounts = await ethereum.request({ method: "eth_accounts" });
 
       if (accounts !== 0) {
-        getAllWaves();
+        // getAllWaves();
         const newAccount = accounts[0];
         console.log("Here, found an authorized account:", newAccount);
         setCurrentAccount(newAccount);
@@ -79,7 +79,7 @@ export default function App() {
         const waveTransaction = await wavePortalContract.wave(
           // 'this message must be provided by any user not hard coded',
           message,
-          { gasLimit: 300000 }
+          // { gasLimit: 300000 }
         );
         setMinning(!minning);
         console.log(message);
