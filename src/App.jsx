@@ -122,8 +122,8 @@ export default function App() {
         // the real waver action
         const message = enteredMessageRef.current.value;
         const waveTransaction = await wavePortalContract.wave(
-          // 'this message must be provided by any user not hard coded'
-          message,
+          'this message must be provided by any user not hard coded',
+          // message,
           { gasLimit: 300000 }
         );
         setMinning(!minning);
