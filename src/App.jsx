@@ -107,8 +107,7 @@ export default function App() {
   };
 
   // calling smart contract properly
-  const wave = async (event) => {
-    // preventDefault.event();
+  const wave = async () => {
     try {
       const { ethereum } = window;
       if (ethereum) {
