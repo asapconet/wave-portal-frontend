@@ -34,7 +34,7 @@ export default function App() {
         //this struct is only needed in the frontend
 
         //THE FIRST METHOD TO MAP THE MASSAGES STORED ON THE ARRAY
-        let wavesCleaned = wave.map(() => {
+        let wavesCleaned = waves.map((wave) => {
         	return {
         		address: wave.waver,
         		timestamp: new Date(wave.timestamp * 1000),
