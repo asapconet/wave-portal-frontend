@@ -28,23 +28,26 @@ export default function App() {
 
 				//the main mathod to get all the waves
 				const waves = await wavePortalContract.getAllWaves();
-
 				//this struct is only needed in the frontend
-				let wavesCleaned = wave.map(() => {
-					return {
-						address: wave.waver,
-						timestamp: new Date(wave.timestamp * 1000),
-						message: wave.message
-					};
-				});
-				// let wavesCleaned = [];
-				// waves.forEach(wave => {
-				// 	wavesCleaned.push({
+
+        //THE FIRST METHOD TO MAP THE MASSAGES STORED ON THE ARRAY
+				// let wavesCleaned = wave.map(() => {
+				// 	return {
 				// 		address: wave.waver,
 				// 		timestamp: new Date(wave.timestamp * 1000),
 				// 		message: wave.message
-				// 	});
+				// 	};
 				// });
+        
+        //THE SECOND METHOD TO ASSIGN THE STRUCT TO AN ARRAY(FE)
+				let wavesCleaned = [];
+				waves.forEach(wave => {
+					wavesCleaned.push({
+						address: wave.waver,
+						timestamp: new Date(wave.timestamp * 1000),
+						message: wave.message
+					});
+				});
 				console.log(wavesCleaned);
 				// for storing our data in the state
 				setAllWaves(wavesCleaned);
