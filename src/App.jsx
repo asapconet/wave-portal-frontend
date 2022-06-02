@@ -35,11 +35,11 @@ export default function App() {
 
         //THE FIRST METHOD TO MAP THE MASSAGES STORED ON THE ARRAY
         let wavesCleaned = wave.map(() => {
-        	return {
-        		address: wave.waver,
-        		timestamp: new Date(wave.timestamp * 1000),
-        		message: wave.message
-        	};
+          return {
+            address: wave.waver,
+            timestamp: new Date(wave.timestamp * 1000),
+            message: wave.message,
+          };
         });
 
         //THE SECOND METHOD TO ASSIGN THE STRUCT TO AN ARRAY(FE)
@@ -107,7 +107,8 @@ export default function App() {
   };
 
   // calling smart contract properly
-  const wave = async () => {
+  const wave = async (event) => {
+    // preventDefault.event();
     try {
       const { ethereum } = window;
       if (ethereum) {
@@ -119,7 +120,7 @@ export default function App() {
           signer
         );
         // the real waver action
-        const message = enteredMessageRef().current.value;
+        const message = enteredMessageRef.current.value;
         const waveTransaction = await wavePortalContract.wave(
           // 'this message must be provided by any user not hard coded'
           message,
@@ -200,7 +201,7 @@ export default function App() {
         </div>
         <div className="msg--wave">
           <input
-          id="message"
+            id="message"
             type="text"
             placeholder={"spill out here ~kiki"}
             className="msg--box"
