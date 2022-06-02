@@ -45,5 +45,10 @@
   height: 1.7rem;
   border-radius: 0px;
   border: solid .5px gray;
-  text-format: inherit;
+  text-transform: inherit;
+
+}
+.msg--box::placeholder {
+  font-style: italic;
+  font-size: smaller;
 }

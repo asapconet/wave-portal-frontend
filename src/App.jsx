@@ -10,6 +10,9 @@ export default function App() {
   const [minning, setMinning] = React.useState(false);
   const [allWaves, setAllWaves] = React.useState([]);
 
+  // Message getter hook
+  const enteredMessageRef = React.useRef();
+
   const contractAddress = "0x64b95D6b0a89016627b966154a95498974ddDbD4";
 
   const contractABI = abi.abi;
@@ -116,6 +119,7 @@ export default function App() {
           signer
         );
         // the real waver action
+        const message = enteredMessageRef().current.value;
         const waveTransaction = await wavePortalContract.wave(
           // 'this message must be provided by any user not hard coded'
           message,
@@ -196,9 +200,11 @@ export default function App() {
         </div>
         <div className="msg--wave">
           <input
+          id="message"
             type="text"
-            placeholder="spill out here ~kiki"
+            placeholder={"spill out here ~kiki"}
             className="msg--box"
+            ref={enteredMessageRef}
           />
           <button className="waveButton" onClick={wave}>
             Wave at Me
