@@ -13,7 +13,7 @@ export default function App() {
   // Message getter hook
   const enteredMessageRef = React.useRef();
 
-  const contractAddress = "0x630783Bd3b27bE6B247CC4cF584449Fd6A4034Bd";
+  const contractAddress = "0x744e33476C8Af411A0FBbfc55585dE2775843994";
 
   const contractABI = abi.abi;
 
