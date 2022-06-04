@@ -1,0 +1,12 @@
+.main--page {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}
+
+.quick--nav {
+  display: flex;
+  justify-content: end;
+  padding: 0.3rem;
+}
