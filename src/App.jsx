@@ -13,7 +13,7 @@ export default function App() {
   // Message getter hook
   const enteredMessageRef = React.useRef();
 
-  const contractAddress = "0xbB852404B2638Dd3077e18714fb131E1C9975DC6";
+  const contractAddress = "0x6b53375aA4AcD87c2be2ac5ADd9d7383C706149D";
 
   const contractABI = abi.abi;
 
@@ -79,7 +79,7 @@ export default function App() {
         const waveTransaction = await wavePortalContract.wave(
           // 'this message must be provided by any user not hard coded',
           message,
-          // { gasLimit: 300000 }
+          { gasLimit: 300000 }
         );
         setMinning(!minning);
         console.log(message);
