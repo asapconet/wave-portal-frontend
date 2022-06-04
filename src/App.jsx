@@ -79,7 +79,7 @@ export default function App() {
         const waveTransaction = await wavePortalContract.wave(
           // 'this message must be provided by any user not hard coded',
           message,
-          { gasLimit: 300000 }
+          { gasLimit: 300000 } //to avoid being overcharged
         );
         setMinning(!minning);
         console.log(message);
@@ -158,7 +158,7 @@ export default function App() {
     walletCheck();
   }, []);
 
-  // stored items getter hook func
+  // this hook listens if their is any event emitted from smart contract
   useEffect(() => {
     let wavePortalContract;
 
