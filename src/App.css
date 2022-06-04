@@ -27,8 +27,9 @@
 .waveButton {
   cursor: pointer;
   padding: 8px;
+  margin: 3px, 0, 0, 3px;
   border: 0;
-  border-radius: 0px;
+  border-radius: 5px;
   background-color: yellowgreen;
 }
 
@@ -36,7 +37,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top:1.4rem;
+  margin-top: 1.4rem;
   margin-bottom: 1.4rem;
   width: 100%;
 }
@@ -44,9 +45,8 @@
 .msg--box {
   height: 1.7rem;
   border-radius: 0px;
-  border: solid .5px gray;
+  border: solid 0.5px gray;
   text-transform: inherit;
-
 }
 .msg--box::placeholder {
   font-style: italic;
@@ -56,5 +56,5 @@
 .msg--card {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
 }
