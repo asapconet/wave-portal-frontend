@@ -1,12 +1,27 @@
 .main--page {
   display: flex;
+  flex-direction: column;
   justify-items: center;
   align-items: center;
   text-align: center;
+  padding: 0.4rem;
+}
+.main--page p {
+  padding: 3rem;
 }
 
 .quick--nav {
   display: flex;
   justify-content: end;
   padding: 0.3rem;
+}
+.main--section {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 660px) {
+  .waveButton {
+    width: 25%;
+  }
 }

@@ -195,24 +195,26 @@ export default function App() {
     <>
       {currentAccount && (
         <button className="waveButton" onClick={walletConnect}>
-          Connect Wallet
+          {/* Connect Wallet */}
         </button>
       )}
       <div className="mainContainer">
         <div className="dataContainer">
-          <div className="header">👋 Hey there!</div>
+          <div className="header">👋 Hey, lets play lucky!</div>
           <div className="bio">
-            Hi my name is Asap and I work with web2 & 3 simultaniosly that's
-            pretty cool yhh. right? Connect your Ethereum wallet and holla at
-            me!
             <p>
-              So you can send me pretty much anything [link to your fav movie, a
-              Message... something sweet] a stand a chance of getting 0.0001eth
-              with love from me.
+              So you can send me pretty much anything{" "}
+              <i>
+                <br />
+                <b style={{ padding: 3 }}>
+                  [link to your fav movie, a Message... something sweet]
+                </b>{" "}
+              </i>
+              <br />a stand a chance of getting 0.0001eth with love from me.
             </p>
           </div>
           <div className="msg--wave">
-            <input
+            <textarea
               id="message"
               type="text"
               placeholder={"spill out here ~kiki"}
@@ -220,7 +222,7 @@ export default function App() {
               ref={enteredMessageRef}
             />
             <button className="waveButton" onClick={wave}>
-              Wave at Me
+              <b>Wave at Me</b>
             </button>
           </div>
           {!currentAccount && (
@@ -241,15 +243,7 @@ export default function App() {
           <span />
           {allWaves.map((wave, index) => {
             return (
-              <div
-                key={index}
-                className="msg--card"
-                styles={{
-                  backgroundColor: "OldLace",
-                  marginTop: "16px",
-                  padding: "8px",
-                }}
-              >
+              <div key={index} className="msg--card">
                 <div>Address:{wave.address}</div>
                 <div>Time: {wave.timestamp.toString()}</div>
                 <div>Message: {wave.message}</div>

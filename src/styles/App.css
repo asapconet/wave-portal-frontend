@@ -31,30 +31,43 @@
   border: 0;
   border-radius: 5px;
   background-color: yellowgreen;
+  width: 40%;
 }
-
+i {
+  font-size: smaller;
+  font-weight: 300;
+}
 .msg--wave {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: 1.4rem;
   margin-bottom: 1.4rem;
   width: 100%;
 }
+.msg--wave textarea {
+  width: 25rem;
+  height: 7rem;
+}
 
 .msg--box {
   height: 1.7rem;
-  border-radius: 0px;
-  border: solid 0.5px gray;
+  border-radius: 3px;
+  border: solid 0.01px #cdcbcb;
   text-transform: inherit;
 }
 .msg--box::placeholder {
   font-style: italic;
   font-size: smaller;
+  text-align: center;
 }
 
 .msg--card {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  background-color: darkgray;
+  border-radius: 0.4px;
+  border: solid 0.01px greenyellow;
+  gap: 1rem;
 }
