@@ -244,9 +244,11 @@ export default function App() {
           {allWaves.map((wave, index) => {
             return (
               <div key={index} className="msg--card">
-                <div>Address:{wave.address}</div>
-                <div>Time: {wave.timestamp.toString()}</div>
-                <div>Message: {wave.message}</div>
+                <div className="main--items">Address:{wave.address}</div>
+                <div className="main--items">
+                  Time: {wave.timestamp.toString()}
+                </div>
+                <div className="main--items">Message: {wave.message}</div>
               </div>
             );
           })}{" "}

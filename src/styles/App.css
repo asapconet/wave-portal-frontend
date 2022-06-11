@@ -61,13 +61,20 @@ i {
   font-style: italic;
   font-size: smaller;
   text-align: center;
+  padding: 5px;
 }
 
 .msg--card {
   display: flex;
   flex-direction: column;
-  background-color: darkgray;
-  border-radius: 0.4px;
-  border: solid 0.01px greenyellow;
+  background-color: rgb(152, 236, 200);
+  border-radius: 10px;
+  border: solid 0.01px rgb(205, 236, 159);
   gap: 1rem;
+  padding: .5rem;
+  margin: .4rem;
+}
+.main--items {
+  font-size: 500;
+
 }
