@@ -8,6 +8,13 @@
 }
 .main--page p {
   padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.brakes {
+  padding: 3rem;
 }
 
 .quick--nav {
