@@ -9,6 +9,7 @@ export default function App() {
   const [waved, setWaved] = React.useState(false);
   const [minning, setMinning] = React.useState(false);
   const [allWaves, setAllWaves] = React.useState([]);
+  const [numStatus, setNumStatus] = React.useState("");
 
   // Message getter hook
   const enteredMessageRef = React.useRef();
@@ -162,17 +163,28 @@ export default function App() {
   useEffect(() => {
     let wavePortalContract;
 
-    const onNewWave = (from, timestamp, message) => {
-      console.log("NewWave", from, timestamp, message);
+    const onNewWave = (from, luckNum, message) => {
+      console.log("NewWave", from, luckNum, message);
       setAllWaves((prevState) => [
         ...prevState,
         {
           address: from,
-          timestamp: new Date(timestamp * 1000),
+          // timestamp: new Date(timestamp * 1000),
+          luckNum: luckNum,
           message: message,
         },
       ]);
     };
+
+    const winning = (luckNum) => {
+      if (luckNum <= 40) {
+        setNumStatus("Congratulations");
+      } else {
+        setNumStatus("Try a little harder");
+      }
+      return numStatus;
+    };
+
     if (window.ethereum) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
@@ -210,7 +222,8 @@ export default function App() {
                   [link to your fav movie, a Message... something sweet]
                 </b>{" "}
               </i>
-              <br />a stand a chance of getting 0.0001eth with love from me.
+              <br />
+              and stand a chance of getting 0.0001eth with love from me.
             </p>
           </div>
           <div className="msg--wave">
@@ -244,11 +257,17 @@ export default function App() {
           {allWaves.map((wave, index) => {
             return (
               <div key={index} className="msg--card">
-                <div className="main--items">Address:{wave.address}</div>
                 <div className="main--items">
-                  Time: {wave.timestamp.toString()}
+                  Address:<span>{wave.address}</span>
                 </div>
-                <div className="main--items">Message: {wave.message}</div>
+                <div className="main--items">
+                  {/* Time:<span> {wave.timestamp.toString()}</span> */}
+                  Your Lucky Num: {wave.luckNum}
+                </div>
+                <div className="main--items">
+                  Message:<span> {wave.message}</span>
+                </div>
+                {winning}
               </div>
             );
           })}{" "}
