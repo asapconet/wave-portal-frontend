@@ -1,6 +1,6 @@
 import React from "react";
 // import { ethers } from "ethers";
-import "./styles/DropPage.css";
+import "../styles/DropPage.css";
 
 const DropPage = () => {
   const [currentAccount, setCurrentAccount] = React.useState("");

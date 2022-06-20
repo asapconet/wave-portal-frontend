@@ -6,8 +6,8 @@ import DropPage from './DropPage'
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
-    <DropPage/>
+    <App />
+    {/* <DropPage/> */}
   </React.StrictMode>,
   document.getElementById('root')
 )
