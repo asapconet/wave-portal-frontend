@@ -262,12 +262,12 @@ export default function App() {
                 </div>
                 <div className="main--items">
                   {/* Time:<span> {wave.timestamp.toString()}</span> */}
-                  Your Lucky Num: {wave.luckNum}
+                  Your Lucky Num: {wave.luckNum.toNumber()}
                 </div>
                 <div className="main--items">
                   Message:<span> {wave.message}</span>
                 </div>
-                {winning}
+                {/* {winning} */}
               </div>
             );
           })}{" "}
