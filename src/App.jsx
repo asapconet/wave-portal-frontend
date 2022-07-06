@@ -81,7 +81,7 @@ export default function App() {
         const waveTransaction = await wavePortalContract.wave(
           // 'this message must be provided by any user not hard coded',
           message,
-          { gasLimit: 300000 } //to avoid being overcharged
+          { gasLimit: 300000 } //to avoid being overcharged[infinite loop]  
         );
         setMinning(!minning);
         console.log(message);
@@ -217,11 +217,11 @@ export default function App() {
             👋 Hey, lets play lucky!
           </Heading>
           <div className="bio">
-            <Text color='black'>
+            <Text>
               So you can send me pretty much anything{" "}
               <i>
                 <br />
-                <b  style={{ paddingY: 5, }}>
+                <b style={{ padding: 5 }}>
                   [link to your fav movie, a Message... something sweet]
                 </b>
               </i>
@@ -238,6 +238,7 @@ export default function App() {
             <Textarea
               id="message"
               type="text"
+              padding="32px"
               placeholder={"spill out here ~kiki"}
               className="msg--box"
               ref={enteredMessageRef}
@@ -266,7 +267,7 @@ export default function App() {
             return (
               <div key={index} className="msg--card">
                 <div className="main--items">
-                  Address:<span>{wave.address}</span>
+                  Address: <span>{wave.address}</span>
                 </div>
                 <div className="main--items">
                   {/* Time:<span> {wave.timestamp.toString()}</span> */}
