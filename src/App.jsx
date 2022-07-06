@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { ethers } from "ethers";
 import "./styles/App.css";
 import abi from "./utils/WavePortal.json";
+import { Button, Heading, Text, Textarea } from "@chakra-ui/react";
 
 export default function App() {
   const [currentAccount, setCurrentAccount] = React.useState("");
@@ -205,39 +206,46 @@ export default function App() {
 
   return (
     <>
-      {currentAccount && (
+      {/* {currentAccount && (
         <button className="waveButton" onClick={walletConnect}>
-          {/* Connect Wallet */}
+          Connect Wallet
         </button>
-      )}
+      )} */}
       <div className="mainContainer">
         <div className="dataContainer">
-          <div className="header">👋 Hey, lets play lucky!</div>
+          <Heading className="header" as="h1" fontSize="50px" fontWeight="800">
+            👋 Hey, lets play lucky!
+          </Heading>
           <div className="bio">
-            <p>
+            <Text color='black'>
               So you can send me pretty much anything{" "}
               <i>
                 <br />
-                <b style={{ padding: 3 }}>
+                <b  style={{ paddingY: 5, }}>
                   [link to your fav movie, a Message... something sweet]
-                </b>{" "}
+                </b>
               </i>
               <br />
-              and stand a chance of getting 0.0001eth with love from me.
-            </p>
+              and stand a chance of getting{" "}
+              <Text fontWeight="bold" color="green">
+                {" "}
+                0.0001eth
+              </Text>{" "}
+              with love from me.
+            </Text>
           </div>
-          <div className="msg--wave">
-            <textarea
+          <form onSubmit={wave} className="msg--wave">
+            <Textarea
               id="message"
               type="text"
               placeholder={"spill out here ~kiki"}
               className="msg--box"
               ref={enteredMessageRef}
             />
-            <button className="waveButton" onClick={wave}>
+            <Button type="submit" size={"lg"} className="waveButton">
               <b>Wave at Me</b>
-            </button>
-          </div>
+            </Button>
+          </form>
           {!currentAccount && (
             <button className="waveButton" onClick={walletConnect}>
               Connect Wallet
@@ -262,12 +270,12 @@ export default function App() {
                 </div>
                 <div className="main--items">
                   {/* Time:<span> {wave.timestamp.toString()}</span> */}
-                  Your Lucky Num: {wave.luckNum}
+                  Your Lucky Num: {wave.luckNum.toNumber()}
                 </div>
                 <div className="main--items">
                   Message:<span> {wave.message}</span>
                 </div>
-                {winning}
+                {/* {winning} */}
               </div>
             );
           })}{" "}

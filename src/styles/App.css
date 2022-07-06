@@ -1,3 +1,7 @@
+body {
+  background-image: url(./public/images/chris-lee-70l1tDAI6rM-unsplash.jpg);
+  background-size: contain;
+}
 .mainContainer {
   display: flex;
   justify-content: center;
@@ -6,6 +10,7 @@
 }
 
 .dataContainer {
+  backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,13 +19,12 @@
 
 .header {
   text-align: center;
-  font-size: 32px;
-  font-weight: 600;
+  color: white;
 }
 
 .bio {
   text-align: center;
-  color: gray;
+  color: white;
   margin-top: 16px;
 }
 
@@ -71,10 +75,23 @@ i {
   border-radius: 10px;
   border: solid 0.01px rgb(205, 236, 159);
   gap: 1rem;
-  padding: .5rem;
-  margin: .4rem;
+  padding: 0.5rem;
+  margin: 0.4rem;
 }
 .main--items {
   font-size: 800;
+}
 
+@media screen and (min-width: 660px) {
+  body {
+    background-image: url(./public/images/ryland-dean-6k6N8HTrXyE-unsplash.jpg);
+    background-size: cover;
+    color: white;
+  }
+  .header {
+    color: green;
+  }
+  .dataContainer {
+    backdrop-filter: blur(10px);
+  }
 }
